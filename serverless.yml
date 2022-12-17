@@ -24,12 +24,17 @@ plugins:
 provider:
   name: aws
   region: us-east-1
-  runtime: nodejs16.x
   stage: dev
+  runtime: nodejs16.x
+  tracing:
+    apiGateway: true
+    lambda: true
 
   iamRoleStatements:
     - Effect: "Allow"
       Action:
+        - "xray:PutTraceSegments"
+        - "xray:PutTelemetryRecords"
         - dynamodb:*      
       Resource:
         - "*"

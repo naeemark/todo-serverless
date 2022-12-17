@@ -12,7 +12,7 @@
     },
     "scripts": {
         "dev": "AWS_PROFILE=arsal IS_OFFLINE_MODE=true nodemon node_modules/.bin/sls offline start --noTimeout",        
-        "deploy": "node_modules/.bin/sls deploy",
+        "deploy": "node_modules/.bin/sls deploy --aws-profile arsal",
         "lint": "eslint '**/*.js' --ignore-path .gitignore --ignore-pattern internals/scripts",
         "lint:fix": "yarn lint -- --fix",        
         "test": "cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --coverage --testPathPattern=\"(/src/.*)\\.(spec).js$\" --passWithNoTests"
