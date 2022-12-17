@@ -1,0 +1,32 @@
+{
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": [
+        "src"
+      ],
+      "@handler/*": [
+        "src/handler/*"
+      ],
+      "@config/*": [
+        "src/config/*"
+      ],
+      "@middlewares/*": [
+        "src/middlewares/*"
+      ],
+      "@repos/*": [
+        "src/repository/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ]
+    }
+  }
+}

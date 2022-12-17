@@ -1,0 +1,17 @@
+{
+  "generator-astro-sls": {
+    "name": "todo-serverless",
+    "apibase": "handler",
+    "apiversion": "v1",
+    "version": "1.0.0",
+    "description": "This project generated using serverless node generator for todo-serverless",
+    "author": "Naeem",
+    "src": "src",
+    "last_endpoint": "hello",
+    "last_apidesc": "A handler for hello",
+    "last_method": "get",
+    "last_handlerType": "true",
+    "last_handlerrequire": "true",
+    "last_service": "hello"
+  }
+}

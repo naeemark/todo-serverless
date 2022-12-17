@@ -1,0 +1,51 @@
+service: todo-serverless
+
+package:
+  individually: true
+  exclude:
+    - .eslintrc
+    - LICENSE
+    - .yo-rc.json
+    - README.md
+    - yarn.lock
+
+custom:
+  project: "todo-serverless"
+  stage: ${opt:stage, self:provider.stage}
+  settings:
+    dev:
+      STAGE: ${self:custom.stage}
+      NODE_ENV: "develop"
+
+plugins:
+  - serverless-plugin-tracing
+  - serverless-offline
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs16.x
+  stage: dev
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:*      
+      Resource:
+        - "*"
+
+functions:
+
+  hello:
+    handler: src/index.hello
+    name: ${self:custom.project}-${self:custom.stage}-hello
+    tracing: true
+    events:
+      - http:
+          method: get
+          path: hello
+          cors:
+            origin: "*"
+            headers:
+              - "*"
+            allowCredentials: true
