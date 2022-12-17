@@ -19,7 +19,7 @@
         "src/middlewares/*"
       ],
       "@repos/*": [
-        "src/repository/*"
+        "src/repositories/*"
       ],
       "@services/*": [
         "src/services/*"

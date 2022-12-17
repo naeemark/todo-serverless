@@ -44,11 +44,24 @@ functions:
   hello:
     handler: src/index.hello
     name: ${self:custom.project}-${self:custom.stage}-hello
-    tracing: true
     events:
       - http:
           method: get
           path: hello
+          cors:
+            origin: "*"
+            headers:
+              - "*"
+            allowCredentials: true
+
+  
+  createTodoV1:
+    handler: src/index.createTodoV1
+    name: ${self:custom.project}-${self:custom.stage}-v1-createTodo
+    events:
+      - http:
+          method: post
+          path: v1/todo
           cors:
             origin: "*"
             headers:
