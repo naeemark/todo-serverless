@@ -30,7 +30,19 @@ describe('Service - todo', () => {
 
   it('should do unit test for create', () => {
     todoRepository.createItem.mockImplementation(() => Promise.resolve(todo));
-    return service.create({}).then((response) => {
+    return service.create({ title: todo.title, description: todo.description }).then((response) => {
+      expect(response).not.toBe(null);
+      expect(response).toBeObject();
+      expect(response).toHaveProperty('id');
+      expect(response).toHaveProperty('title');
+      expect(response).toHaveProperty('description');
+      expect(response.id).toEqual(todo.id);
+    });
+  });
+
+  it('should do unit test for create by put', () => {
+    todoRepository.createItem.mockImplementation(() => Promise.resolve(todo));
+    return service.create(todo).then((response) => {
       expect(response).not.toBe(null);
       expect(response).toBeObject();
       expect(response).toHaveProperty('id');

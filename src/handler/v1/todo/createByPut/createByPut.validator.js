@@ -1,12 +1,12 @@
 const Joi = require('@hapi/joi');
 
 module.exports = {
-  name: 'update',
-  path: '/v1/todo/{id}',
+  name: 'createByPut',
+  path: '/v1/todo',
   type: 'put',
   joiSchema: {
-    params: Joi.object().keys({ id: Joi.string().guid().required() }).options({ stripUnknown: true }),
     body: Joi.object({
+      id: Joi.string().guid().required().strict(),
       title: Joi.string().required().strict(),
       description: Joi.string().required().strict()
     }).options({ stripUnknown: false }),
