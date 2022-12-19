@@ -81,7 +81,7 @@ class APIError extends ExtendableError {
 
   static notUpdated() {
     return new APIError({
-      message: 'Resource not Updated!',
+      message: 'There was an error while creating a new To-Do object.',
       status: httpStatus.NOT_MODIFIED,
       errors: [generateError('NOT_MODIFIED', 'Oops! Something is wrong', 'The resource is not updated!')]
     });

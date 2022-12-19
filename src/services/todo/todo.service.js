@@ -15,6 +15,12 @@ const get = async (id) => {
   return item;
 };
 
+const update = async (id, requestBody) => {
+  await get(id); // ensures if the item exists
+  // eslint-disable-next-line no-return-await
+  return await repository.updateItem(id, requestBody);
+};
+
 const deleteItem = async (id) => {
   await get(id); // ensures if the item exists
   // eslint-disable-next-line no-return-await
@@ -26,6 +32,7 @@ const list = async () => repository.list();
 module.exports = {
   create,
   get,
+  update,
   deleteItem,
   list
 };
