@@ -46,7 +46,7 @@ const convertValidationError = (err) => {
   });
 
   return new APIError({
-    message: 'Validation error',
+    message: 'There was an error while updating the To-Do object.',
     errors: formattedErrors,
     route: 'default',
     status: 400,

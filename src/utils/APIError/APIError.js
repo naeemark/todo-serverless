@@ -63,19 +63,11 @@ class APIError extends ExtendableError {
     });
   }
 
-  static errorVerifyEmail() {
+  static notCreated() {
     return new APIError({
-      message: 'Error Verify Email',
-      status: httpStatus.ORIGIN_IS_UNREACHABLE,
-      errors: [generateError('ORIGIN_IS_UNREACHABLE', 'Oops! Something is wrong', 'The verification was not successful!')]
-    });
-  }
-
-  static errorAlreadyVerifiedEmail() {
-    return new APIError({
-      message: 'Error Verify Email',
-      status: httpStatus.FORBIDDEN,
-      errors: [generateError('FORBIDDEN', 'Oops! Something is wrong', 'The user email is already verified!')]
+      message: 'There was an error while creating the To-Do object.',
+      status: httpStatus.BAD_REQUEST,
+      errors: [generateError('BAD_REQUEST', 'Oops! Something is wrong', 'There was an error while creating the To-Do object.')]
     });
   }
 
@@ -95,14 +87,6 @@ class APIError extends ExtendableError {
     });
   }
 
-  static userNotFound() {
-    return new APIError({
-      message: 'User not found!',
-      status: httpStatus.NOT_FOUND,
-      errors: [generateError('USER_NOT_FOUND', 'Oops! Something is wrong', 'The user you are looking for does not exist!')]
-    });
-  }
-
   static userAlreadyExists() {
     return new APIError({
       message: 'User already exits!',
@@ -111,28 +95,11 @@ class APIError extends ExtendableError {
     });
   }
 
-  static invalidPassword() {
-    return new APIError({
-      message: 'Password does not match!',
-      status: httpStatus.UNAUTHORIZED,
-      errors: [generateError('UNAUTHORIZED', 'Invalid Password', 'Wrong password was supplied!')]
-    });
-  }
-
   static forbidden() {
     return new APIError({
       message: 'Request forbidden!',
       status: httpStatus.FORBIDDEN,
       errors: [generateError('FORBIDDEN', 'Oops! Something is wrong', 'This resource is forbidden')]
-    });
-  }
-
-
-  static socialAuthFailed(message) {
-    return new APIError({
-      message: 'Social Auth Failed!',
-      status: httpStatus.PRECONDITION_FAILED,
-      errors: [generateError('PRECONDITION_FAILED', 'Oops! Something is wrong', message)]
     });
   }
 

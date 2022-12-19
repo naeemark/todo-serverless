@@ -8,7 +8,7 @@ module.exports = {
     body: Joi.object({
       title: Joi.string().required().strict(),
       description: Joi.string().required().strict()
-    }).options({ stripUnknown: true }),
+    }).options({ stripUnknown: false }),
     response: {
       200: {
         description: 'OK',

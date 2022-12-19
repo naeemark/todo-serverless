@@ -11,10 +11,10 @@
         "yarn": "*"
     },
     "scripts": {
-        "dev": "AWS_PROFILE=arsal IS_OFFLINE_MODE=true nodemon node_modules/.bin/sls offline start --noTimeout",        
+        "dev": "AWS_PROFILE=arsal IS_OFFLINE_MODE=true nodemon node_modules/.bin/sls offline start --noTimeout",
         "deploy": "node_modules/.bin/sls deploy --aws-profile arsal",
         "lint": "eslint '**/*.js' --ignore-path .gitignore --ignore-pattern internals/scripts",
-        "lint:fix": "yarn lint -- --fix",        
+        "lint:fix": "yarn lint -- --fix",
         "test": "cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --coverage --testPathPattern=\"(/src/.*)\\.(spec).js$\" --passWithNoTests"
     },
     "keywords": [
@@ -68,25 +68,27 @@
         "middy": "^0.27.0",
         "module-alias": "^2.0.6",
         "node-sanitizer": "^1.0.5",
-        "serverless-plugin-tracing": "^2.0.0"
-      },
-      "devDependencies": {
+        "serverless-plugin-tracing": "^2.0.0",
+        "uuid": "^9.0.0"
+    },
+    "devDependencies": {
         "@types/jest": "^24.0.15",
         "aws-event-mocks": "^0.0.0",
         "eslint": "^5.16.0",
         "eslint-config-astro": "^1.0.8",
         "eslint-import-resolver-module-alias": "^0.1.0",
         "eslint-plugin-import": "^2.17.3",
-        "joi": "^14.3.1",
         "jest": "^26.1.0",
         "jest-express": "^1.10.1",
         "jest-extended": "^0.11.2",
         "jest-tobetype": "^1.2.3",
+        "joi": "^14.3.1",
         "mock-express-request": "^0.2.2",
         "mock-express-response": "^0.3.0",
         "nodemon": "^2.0.20",
         "prettier-eslint": "^9.0.0",
         "serverless": "^3.25.1",
+        "serverless-dynamodb-local": "^0.2.40",
         "serverless-offline": "^12.0.2",
         "supertest": "^6.3.3"
     },
@@ -102,6 +104,7 @@
             "^@utils(.*)$": "<rootDir>/src/utils$1",
             "^@repos(.*)$": "<rootDir>/src/repositories$1"
         },
+        "coveragePathIgnorePatterns": ["src/utils/APIError"],        
         "setupFilesAfterEnv": [
             "jest-extended"
         ],

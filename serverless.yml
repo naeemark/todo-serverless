@@ -12,14 +12,42 @@ package:
 custom:
   project: "todo-serverless"
   stage: ${opt:stage, self:provider.stage}
+  dynamodb:
+    stages:
+      - dev
+    start:
+      docker: true
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+      convertEmptyValues: true
   settings:
     dev:
       STAGE: ${self:custom.stage}
       NODE_ENV: "develop"
+      TABLE_NAME_TODO: todo-${self:custom.stage}
 
 plugins:
   - serverless-plugin-tracing
+  - serverless-dynamodb-local
   - serverless-offline
+
+resources:
+  Resources:
+    TodoTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.settings.dev.TABLE_NAME_TODO}
 
 provider:
   name: aws
@@ -38,9 +66,13 @@ provider:
         - dynamodb:*      
       Resource:
         - "*"
+  environment:
+    STAGE: ${self:custom.stage}
+    NODE_ENV: ${self:custom.settings.dev.NODE_ENV}
+    TABLE_NAME_TODO: ${self:custom.settings.dev.TABLE_NAME_TODO}
+    LOCAL_DYNAMODB_END_POINT: http://localhost:8000
 
 functions:
-
   hello:
     handler: src/index.hello
     name: ${self:custom.project}-${self:custom.stage}-hello
@@ -54,7 +86,6 @@ functions:
               - "*"
             allowCredentials: true
 
-  
   createTodoV1:
     handler: src/index.createTodoV1
     name: ${self:custom.project}-${self:custom.stage}-v1-createTodo

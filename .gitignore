@@ -58,3 +58,4 @@ jspm_packages
 
 # serverless-build
 .serverless
+.dynamodb
