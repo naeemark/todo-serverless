@@ -7,7 +7,7 @@ const logger = require('@utils/logger');
  * create
  * @public
  */
-exports.create = async (event) => {
+exports.handler = async (event) => {
   logger.debug(event);
   const response = await create(event.body);
   return OK('To-Do object created successfully.', response, httpStatus.CREATED);

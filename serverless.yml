@@ -111,3 +111,16 @@ functions:
             headers:
               - "*"
             allowCredentials: true
+            
+  listTodoV1:
+    handler: src/index.listTodoV1
+    name: ${self:custom.project}-${self:custom.stage}-v1-listTodo
+    events:
+      - http:
+          method: get
+          path: v1/todo
+          cors:
+            origin: "*"
+            headers:
+              - "*"
+            allowCredentials: true

@@ -1,4 +1,3 @@
-
 const middy = require('middy');
 const {
   httpEventNormalizer,
@@ -11,8 +10,9 @@ const {
 const { errorMiddleware } = require('@middlewares/error');
 const { routeValidator } = require('@middlewares/route-validator');
 const { monitoringMiddleware } = require('@middlewares/monitoring');
-const handler = require('./create.handler');
-const validator = require('./create.validator');
+
+const handler = require('./list.handler');
+const validator = require('./list.validator');
 
 const handlerWrapper = middy(handler.handler)
   .use(errorMiddleware.converter())

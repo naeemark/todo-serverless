@@ -104,7 +104,12 @@
             "^@utils(.*)$": "<rootDir>/src/utils$1",
             "^@repos(.*)$": "<rootDir>/src/repositories$1"
         },
-        "coveragePathIgnorePatterns": ["src/utils/APIError"],        
+        "coveragePathIgnorePatterns": [
+            "src/config/",
+            "src/repositories/",
+            "src/serverless/aws/",
+            "src/utils/APIError"
+        ],        
         "setupFilesAfterEnv": [
             "jest-extended"
         ],
