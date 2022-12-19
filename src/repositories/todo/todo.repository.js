@@ -66,7 +66,8 @@ const deleteItem = async (id) => {
 const list = async () => {
   const params = { TableName };
   try {
-    await dynamoDbClient.scan(params).promise();
+    const result = await dynamoDbClient.scan(params).promise();
+    return result.Items;
   } catch (err) {
     throw APIError.notFound();
   }
