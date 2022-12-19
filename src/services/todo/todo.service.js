@@ -7,7 +7,11 @@ const { APIError } = require('@utils/APIError');
 
 const repository = require('../../repositories/todo');
 
-const create = async requestBody => repository.createItem({ id: uuidv4(), ...requestBody });
+const create = async (requestBody) => {
+  const item = ('id' in requestBody) ? await repository.createItem(requestBody)
+    : await repository.createItem({ id: uuidv4(), ...requestBody });
+  return item;
+};
 
 const get = async (id) => {
   const item = await repository.getItem(id);

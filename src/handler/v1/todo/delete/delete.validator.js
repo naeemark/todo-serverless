@@ -1,11 +1,11 @@
 const Joi = require('@hapi/joi');
 
 module.exports = {
-  name: 'get',
+  name: 'delete',
   path: '/v1/todo{id}',
-  type: 'get',
+  type: 'delete',
   joiSchema: {
-    params: Joi.object().keys({ id: Joi.string().required() }).options({ stripUnknown: true }),
+    params: Joi.object().keys({ id: Joi.string().guid().required() }).options({ stripUnknown: true }),
     response: {
       200: {
         description: Joi.string(),
