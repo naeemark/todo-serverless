@@ -15,7 +15,7 @@
         "deploy": "node_modules/.bin/sls deploy --aws-profile arsal",
         "lint": "eslint '**/*.js' --ignore-path .gitignore --ignore-pattern internals/scripts",
         "lint:fix": "yarn lint -- --fix",
-        "test": "cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --coverage --testPathPattern=\"(/src/.*)\\.(spec).js$\" --passWithNoTests"
+        "test": "cross-env NODE_ENV=test jest --forceExit --coverage --testPathPattern=\"(/src/.*)\\.(spec).js$\" --passWithNoTests"
     },
     "keywords": [
         "serverless",
