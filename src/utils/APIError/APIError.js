@@ -73,7 +73,7 @@ class APIError extends ExtendableError {
 
   static notFound() {
     return new APIError({
-      message: 'Resource not found!',
+      message: 'There was an error loading the To-Do objects.',
       status: httpStatus.NOT_FOUND,
       errors: [generateError('NOT_FOUND', 'Oops! Something is wrong', 'The resource you are looking for does not exist!')]
     });

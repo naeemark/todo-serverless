@@ -8,8 +8,6 @@ const { dynamoDb: { todoTableName: TableName } } = require('@config/vars');
 const { APIError } = require('@utils/APIError');
 const logger = require('@utils/logger');
 
-const create = async requestBody => requestBody;
-
 /**
  * Creates Item
  * @method createItem
@@ -27,7 +25,24 @@ const createItem = async (requestParams) => {
   }
 };
 
+/**
+ * Returns Single Item
+ * @method getItem
+ * @param {id} Id of a
+ * @returns {Promise} Resolves with Single Item, Rejects Dynamo Error
+ */
+const getItem = async (id) => {
+  logger.info('getItem', { id });
+  const params = { TableName, Key: { id } };
+  try {
+    const result = await dynamoDbClient.get(params).promise();
+    return result.Item;
+  } catch (err) {
+    throw APIError.notFound();
+  }
+};
+
 
 module.exports = {
-  create, createItem
+  createItem, getItem
 };

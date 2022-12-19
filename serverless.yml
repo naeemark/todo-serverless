@@ -98,3 +98,16 @@ functions:
             headers:
               - "*"
             allowCredentials: true
+            
+  getTodoV1:
+    handler: src/index.getTodoV1
+    name: ${self:custom.project}-${self:custom.stage}-v1-getTodo
+    events:
+      - http:
+          method: get
+          path: v1/todo/{id}
+          cors:
+            origin: "*"
+            headers:
+              - "*"
+            allowCredentials: true
