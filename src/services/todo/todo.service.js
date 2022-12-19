@@ -15,10 +15,17 @@ const get = async (id) => {
   return item;
 };
 
+const deleteItem = async (id) => {
+  await get(id); // ensures if the item exists
+  // eslint-disable-next-line no-return-await
+  return await repository.deleteItem(id);
+};
+
 const list = async () => repository.list();
 
 module.exports = {
   create,
   get,
+  deleteItem,
   list
 };

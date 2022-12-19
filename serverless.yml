@@ -112,6 +112,19 @@ functions:
               - "*"
             allowCredentials: true
             
+  deleteTodoV1:
+    handler: src/index.deleteTodoV1
+    name: ${self:custom.project}-${self:custom.stage}-v1-deleteTodo
+    events:
+      - http:
+          method: delete
+          path: v1/todo/{id}
+          cors:
+            origin: "*"
+            headers:
+              - "*"
+            allowCredentials: true
+            
   listTodoV1:
     handler: src/index.listTodoV1
     name: ${self:custom.project}-${self:custom.stage}-v1-listTodo

@@ -97,65 +97,33 @@ describe('Service - todo', () => {
     });
   });
 
-  // it('should do unit test for retrieveProperty - failure', () => {
-  //   todoRepository.retrieve.mockImplementation(() => Promise.reject(APIError.withCode('DATASTORE_FAILURE')));
-  //   return service.retrieveProperty(id, 'id').catch((error) => {
-  //     expect(error).not.toBe(null);
-  //     expect(error).toBeInstanceOf(APIError);
-  //   });
-  // });
+  it('should do unit test for deleteEntity - failure', () => {
+    todoRepository.deleteItem.mockImplementation(() => Promise.reject(APIError.withCode('DATASTORE_FAILURE')));
+    return service.deleteItem(todo.id).catch((error) => {
+      expect(error).not.toBe(null);
+      expect(error).toBeInstanceOf(APIError);
+    });
+  });
 
-  // it('should do unit test for retrieveProperty - success', () => {
-  //   todoRepository.retrieve.mockImplementation(() => Promise.resolve({ id }));
-  //   return service.retrieveProperty(id, 'id').then((response) => {
-  //     expect(response).not.toBe(null);
-  //     expect(response).toEqual(id);
-  //   });
-  // });
+  it('should do unit test for deleteItem - success: true', () => {
+    todoRepository.getItem.mockImplementation(() => Promise.resolve(todo));
+    todoRepository.deleteItem.mockImplementation(() => Promise.resolve({ success: true }));
+    return service.deleteItem(todo.id).then((response) => {
+      expect(response).not.toBe(null);
+      expect(response).toBeObject();
+      expect(response).toHaveProperty('success');
+      expect(response.success).toEqual(true);
+    });
+  });
 
-  // it('should do unit test for update - failure ', () => {
-  //   todoRepository.update.mockImplementation(() => Promise.reject(APIError.withCode('DATASTORE_FAILURE')));
-  //   return service.update(id).catch((error) => {
-  //     expect(error).not.toBe(null);
-  //     expect(error).toBeInstanceOf(APIError);
-  //   });
-  // });
-
-  // it('should do unit test for update - success ', () => {
-  //   todoRepository.update.mockImplementation(() => Promise.resolve({ id }));
-  //   return service.update(id, body).then((response) => {
-  //     expect(response).not.toBe(null);
-  //     expect(response).toBeObject();
-  //     expect(response).toHaveProperty('id');
-  //     expect(response.id).toEqual(id);
-  //   });
-  // });
-
-  // it('should do unit test for deleteEntity - failure', () => {
-  //   todoRepository.deleteEntity.mockImplementation(() => Promise.reject(APIError.withCode('DATASTORE_FAILURE')));
-  //   return service.deleteEntity(id).catch((error) => {
-  //     expect(error).not.toBe(null);
-  //     expect(error).toBeInstanceOf(APIError);
-  //   });
-  // });
-
-  // it('should do unit test for deleteEntity - success: true', () => {
-  //   todoRepository.deleteEntity.mockImplementation(() => Promise.resolve({ success: true }));
-  //   return service.deleteEntity(id).then((response) => {
-  //     expect(response).not.toBe(null);
-  //     expect(response).toBeObject();
-  //     expect(response).toHaveProperty('success');
-  //     expect(response.success).toEqual(true);
-  //   });
-  // });
-
-  // it('should do unit test for deleteEntity - success: false', () => {
-  //   todoRepository.deleteEntity.mockImplementation(() => Promise.resolve({ success: false }));
-  //   return service.deleteEntity(id).then((response) => {
-  //     expect(response).not.toBe(null);
-  //     expect(response).toBeObject();
-  //     expect(response).toHaveProperty('success');
-  //     expect(response.success).toEqual(false);
-  //   });
-  // });
+  it('should do unit test for deleteEntity - success: false', () => {
+    todoRepository.getItem.mockImplementation(() => Promise.resolve(todo));
+    todoRepository.deleteItem.mockImplementation(() => Promise.resolve({ success: false }));
+    return service.deleteItem(todo.id).then((response) => {
+      expect(response).not.toBe(null);
+      expect(response).toBeObject();
+      expect(response).toHaveProperty('success');
+      expect(response.success).toEqual(false);
+    });
+  });
 });

@@ -107,7 +107,7 @@
         "coveragePathIgnorePatterns": [
             "src/config/",
             "src/repositories/",
-            "src/serverless/aws/",
+            "src/services/aws/",
             "src/utils/APIError"
         ],        
         "setupFilesAfterEnv": [
