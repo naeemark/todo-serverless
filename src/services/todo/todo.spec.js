@@ -97,6 +97,25 @@ describe('Service - todo', () => {
     });
   });
 
+  it('should do unit test for update - failure ', () => {
+    todoRepository.updateItem.mockImplementation(() => Promise.reject(APIError.withCode('DATASTORE_FAILURE')));
+    return service.update(todo.id).catch((error) => {
+      expect(error).not.toBe(null);
+      expect(error).toBeInstanceOf(APIError);
+    });
+  });
+
+  it('should do unit test for update - success ', () => {
+    todoRepository.getItem.mockImplementation(() => Promise.resolve(todo));
+    todoRepository.updateItem.mockImplementation(() => Promise.resolve(todo));
+    return service.update(todo.id, todo).then((response) => {
+      expect(response).not.toBe(null);
+      expect(response).toBeObject();
+      expect(response).toHaveProperty('id');
+      expect(response.id).toEqual(todo.id);
+    });
+  });
+
   it('should do unit test for deleteEntity - failure', () => {
     todoRepository.deleteItem.mockImplementation(() => Promise.reject(APIError.withCode('DATASTORE_FAILURE')));
     return service.deleteItem(todo.id).catch((error) => {

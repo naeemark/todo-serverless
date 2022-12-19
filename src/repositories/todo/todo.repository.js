@@ -27,7 +27,7 @@ const createItem = async (requestParams) => {
 /**
  * Returns Single Item
  * @method getItem
- * @param {id} Id of a
+ * @param {id} Id of an Item
  * @returns {Promise} Resolves with Single Item, Rejects Dynamo Error
  */
 const getItem = async (id) => {
@@ -38,6 +38,30 @@ const getItem = async (id) => {
     return result.Item;
   } catch (err) {
     throw APIError.notFound();
+  }
+};
+
+/**
+ * Updates Single Item
+ * @method getItem
+ * @param {id} Id of an Item
+ * @returns {Promise} Resolves with Single Item, Rejects Dynamo Error
+ */
+const updateItem = async (id, requestParams) => {
+  logger.info('updateItem', { id, requestParams });
+  const params = {
+    TableName,
+    Key: { id },
+    ExpressionAttributeNames: { '#title': 'title' },
+    ExpressionAttributeValues: { ':title': requestParams.title, ':description': requestParams.description },
+    UpdateExpression: 'SET #title = :title, description = :description',
+    ReturnValues: 'ALL_NEW'
+  };
+  try {
+    const result = await dynamoDbClient.update(params).promise();
+    return result.Attributes;
+  } catch (err) {
+    throw APIError.notUpdated();
   }
 };
 
@@ -75,5 +99,5 @@ const list = async () => {
 
 
 module.exports = {
-  createItem, getItem, deleteItem, list
+  createItem, getItem, updateItem, deleteItem, list
 };
