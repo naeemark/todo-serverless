@@ -14,7 +14,7 @@ const { monitoringMiddleware } = require('@middlewares/monitoring');
 const handler = require('./get.handler');
 const validator = require('./get.validator');
 
-const handlerWrapper = middy(handler.hello)
+const handlerWrapper = middy(handler.handler)
   .use(errorMiddleware.converter())
   .use(cors())
   .use(httpEventNormalizer())

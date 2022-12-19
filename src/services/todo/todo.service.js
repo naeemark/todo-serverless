@@ -15,7 +15,10 @@ const get = async (id) => {
   return item;
 };
 
+const list = async () => repository.list();
+
 module.exports = {
   create,
-  get
+  get,
+  list
 };

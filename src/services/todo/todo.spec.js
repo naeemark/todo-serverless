@@ -52,7 +52,6 @@ describe('Service - todo', () => {
     todoRepository.getItem.mockImplementation(() => Promise.resolve(null));
     return service.get(todo.id).catch((error) => {
       expect(error).not.toBe(null);
-      console.log(error);
     });
   });
 
@@ -66,4 +65,97 @@ describe('Service - todo', () => {
       expect(response).toEqual(todo);
     });
   });
+
+  it('should do unit test for list - failure', () => {
+    todoRepository.list.mockImplementation(() => Promise.reject(APIError.withCode('DATASTORE_FAILURE')));
+    return service.list().catch((error) => {
+      expect(error).not.toBe(null);
+      expect(error).toBeInstanceOf(APIError);
+    });
+  });
+
+  it('should do unit test for list - success - empty', () => {
+    todoRepository.list.mockImplementation(() => Promise.resolve([]));
+    return service.list().then((response) => {
+      expect(response).not.toBe(null);
+      expect(response).toBeArray();
+      expect(response).toBeArray();
+      expect(response.length).toEqual(0);
+    });
+  });
+
+  it('should do unit test for list - success - withData', () => {
+    todoRepository.list.mockImplementation(() => Promise.resolve([todo]));
+    return service.list().then((response) => {
+      expect(response).not.toBe(null);
+      expect(response).toBeArray();
+      expect(response).toBeArray();
+      expect(response.length).toEqual(1);
+      expect(response[0]).toHaveProperty('id');
+      expect(response[0].id).toEqual(todo.id);
+      expect(response[0]).toEqual(todo);
+    });
+  });
+
+  // it('should do unit test for retrieveProperty - failure', () => {
+  //   todoRepository.retrieve.mockImplementation(() => Promise.reject(APIError.withCode('DATASTORE_FAILURE')));
+  //   return service.retrieveProperty(id, 'id').catch((error) => {
+  //     expect(error).not.toBe(null);
+  //     expect(error).toBeInstanceOf(APIError);
+  //   });
+  // });
+
+  // it('should do unit test for retrieveProperty - success', () => {
+  //   todoRepository.retrieve.mockImplementation(() => Promise.resolve({ id }));
+  //   return service.retrieveProperty(id, 'id').then((response) => {
+  //     expect(response).not.toBe(null);
+  //     expect(response).toEqual(id);
+  //   });
+  // });
+
+  // it('should do unit test for update - failure ', () => {
+  //   todoRepository.update.mockImplementation(() => Promise.reject(APIError.withCode('DATASTORE_FAILURE')));
+  //   return service.update(id).catch((error) => {
+  //     expect(error).not.toBe(null);
+  //     expect(error).toBeInstanceOf(APIError);
+  //   });
+  // });
+
+  // it('should do unit test for update - success ', () => {
+  //   todoRepository.update.mockImplementation(() => Promise.resolve({ id }));
+  //   return service.update(id, body).then((response) => {
+  //     expect(response).not.toBe(null);
+  //     expect(response).toBeObject();
+  //     expect(response).toHaveProperty('id');
+  //     expect(response.id).toEqual(id);
+  //   });
+  // });
+
+  // it('should do unit test for deleteEntity - failure', () => {
+  //   todoRepository.deleteEntity.mockImplementation(() => Promise.reject(APIError.withCode('DATASTORE_FAILURE')));
+  //   return service.deleteEntity(id).catch((error) => {
+  //     expect(error).not.toBe(null);
+  //     expect(error).toBeInstanceOf(APIError);
+  //   });
+  // });
+
+  // it('should do unit test for deleteEntity - success: true', () => {
+  //   todoRepository.deleteEntity.mockImplementation(() => Promise.resolve({ success: true }));
+  //   return service.deleteEntity(id).then((response) => {
+  //     expect(response).not.toBe(null);
+  //     expect(response).toBeObject();
+  //     expect(response).toHaveProperty('success');
+  //     expect(response.success).toEqual(true);
+  //   });
+  // });
+
+  // it('should do unit test for deleteEntity - success: false', () => {
+  //   todoRepository.deleteEntity.mockImplementation(() => Promise.resolve({ success: false }));
+  //   return service.deleteEntity(id).then((response) => {
+  //     expect(response).not.toBe(null);
+  //     expect(response).toBeObject();
+  //     expect(response).toHaveProperty('success');
+  //     expect(response.success).toEqual(false);
+  //   });
+  // });
 });

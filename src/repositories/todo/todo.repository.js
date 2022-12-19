@@ -42,7 +42,22 @@ const getItem = async (id) => {
   }
 };
 
+/**
+ * Returns List
+ * @method list
+ * @returns {Promise} Resolves with a list, Rejects Dynamo Error
+ */
+const list = async () => {
+  const params = { TableName };
+  try {
+    const result = await dynamoDbClient.scan(params).promise();
+    return result.Items;
+  } catch (err) {
+    throw APIError.notFound();
+  }
+};
+
 
 module.exports = {
-  createItem, getItem
+  createItem, getItem, list
 };
