@@ -2,8 +2,8 @@
 
 [![Production Branch](https://github.com/naeemark/todo-serverless/actions/workflows/deploy.yml/badge.svg)](https://github.com/naeemark/todo-serverless/actions/workflows/deploy.yml)
 [![Develop Branch](https://github.com/naeemark/todo-serverless/actions/workflows/build.yml/badge.svg)](https://github.com/naeemark/todo-serverless/actions/workflows/build.yml)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=naeemark_fun-bank-service&metric=coverage)](https://sonarcloud.io/dashboard?id=naeemark_fun-bank-service)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=naeemark_fun-bank-service&metric=alert_status)](https://sonarcloud.io/dashboard?id=naeemark_fun-bank-service)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=naeemark_todo-serverless&metric=coverage)](https://sonarcloud.io/dashboard?id=naeemark_todo-serverless)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=naeemark_todo-serverless&metric=alert_status)](https://sonarcloud.io/dashboard?id=naeemark_todo-serverless)
 
 
 This project generated using serverless node generator
