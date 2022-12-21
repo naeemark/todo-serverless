@@ -74,6 +74,7 @@ This project generated using serverless node generator
 
 How to set up
 
+- You need to [configure aws credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) locally, for this service a local profile is being used, which should be relapaced accordingly in `package.json`
 - To set-up the project locally you need to clone this repo, from `main` or some latest TAG
 
 Install dependencies:
